@@ -44,6 +44,15 @@
 
 #define _PATH_PAPRC	".paprc"
 
+#define COLOR_RIBBON_INSTALLED 0b10000000
+#define SHEET_FEEDER_INSTALLED 0b01000000
+#define PAPER_OUT_ERROR        0b00100000
+#define COVER_OPEN_ERROR       0b00010000
+#define PRINTER_OFF_LINE       0b00001000
+#define PAPER_JAM_ERROR        0b00000100
+#define PRINTER_FAULT          0b00000010
+#define PRINTER_ACTIVE         0b00000001
+
 /* Forward Declaration */
 static void getstatus(ATP atp, struct sockaddr_at *sat);
 
@@ -87,6 +96,15 @@ static char			*printer = NULL;
 
 static char			cbuf[ 8 ];
 static struct nbpnve		nn;
+
+static void * print_status(char status, char mask, char * message){
+    printf("%s", message);
+    if( status & mask){
+	printf("True\n");
+    }else{
+	printf("False\n");
+    }
+}
 
 int main( int ac, char **av)
 {
@@ -200,14 +218,20 @@ static void getstatus(ATP atp, struct sockaddr_at *sat)
 	return;	/* This is weird, since TIDs must match... */
     }
 
-    int i=0;
-    for(;i<iov.iov_len;i++){
-        printf("status byte[%d]: %X\n", i, rbuf[i]);
-    }
-    //printf("status: %x\n", rbuf[1]);
-    //printf("status: %x\n", rbuf[2]);
-    //printf("status: %x\n", rbuf[3]);
-    //printf("status: %x\n", rbuf[4]);
+    char status = rbuf[9];
+    //int i=0;
+    //for(;i<iov.iov_len;i++){
+    //    printf("status response byte[%d]: %X\n", i, rbuf[i]);
+    //}
 
-    printf( "%.*s\n", (int)iov.iov_len - 9, (char *) iov.iov_base + 9 );
+    print_status(status, COLOR_RIBBON_INSTALLED, "Color Ribbon Installed: ");
+    print_status(status, SHEET_FEEDER_INSTALLED, "Sheet Feeder Installed: ");
+    print_status(status, PAPER_OUT_ERROR,        "Paper out Error:        ");
+    print_status(status, COVER_OPEN_ERROR,       "Cover opened:           ");
+    print_status(status, PRINTER_OFF_LINE,       "Printer off line:       ");
+    print_status(status, PAPER_JAM_ERROR,        "Paper Jammed:           ");
+    print_status(status, PRINTER_FAULT,          "Printer in fault:       ");
+    print_status(status, PRINTER_ACTIVE,         "Printer active:         ");
+     
+    //printf( "%.*s\n", (int)iov.iov_len - 9, (char *) iov.iov_base + 9 );
 }
