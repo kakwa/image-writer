@@ -226,12 +226,12 @@ static void getstatus(ATP atp, struct sockaddr_at *sat)
 
     print_status(status, COLOR_RIBBON_INSTALLED, "Color Ribbon Installed: ");
     print_status(status, SHEET_FEEDER_INSTALLED, "Sheet Feeder Installed: ");
-    print_status(status, PAPER_OUT_ERROR,        "Paper out Error:        ");
-    print_status(status, COVER_OPEN_ERROR,       "Cover opened:           ");
-    print_status(status, PRINTER_OFF_LINE,       "Printer off line:       ");
+    print_status(status, PAPER_OUT_ERROR,        "Paper Out Error:        ");
+    print_status(status, COVER_OPEN_ERROR,       "Cover Opened:           ");
+    print_status(status, PRINTER_OFF_LINE,       "Printer Off-Line:       ");
     print_status(status, PAPER_JAM_ERROR,        "Paper Jammed:           ");
-    print_status(status, PRINTER_FAULT,          "Printer in fault:       ");
-    print_status(status, PRINTER_ACTIVE,         "Printer active:         ");
+    print_status(status, PRINTER_FAULT,          "Printer in Fault:       ");
+    print_status(status, PRINTER_ACTIVE,         "Printer Active:         ");
      
     //printf( "%.*s\n", (int)iov.iov_len - 9, (char *) iov.iov_base + 9 );
 }
