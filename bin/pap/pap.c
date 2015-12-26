@@ -594,6 +594,7 @@ static int send_file( int fd, ATP atp, int lastfile)
 
 		/* reset timeout counter for all valid requests */
 		to = 0;
+		printf("response READ: %X\n", cbuf[ 1 ]);
 
 		switch ( cbuf[ 1 ] ) {
 		case PAP_READ :
@@ -807,17 +808,17 @@ static int send_file( int fd, ATP atp, int lastfile)
 	     * The stinking LaserWriter IINTX puts crap in this
 	     * field.
 	     */
-	    if ( ((char *)rniov[ 0 ].iov_base)[ 0 ] != 0 ) {
-		fprintf( stderr, "Bad status response!\n" );
-		exit( 1 );
-	    }
+	    //if ( ((char *)rniov[ 0 ].iov_base)[ 0 ] != 0 ) {
+	    //    fprintf( stderr, "Bad status response!\n" );
+	    //    exit( 1 );
+	    //}
 #endif /* NONZEROSTATUS */
 
-	    if ( ((char *)rniov[ 0 ].iov_base)[ 1 ] != PAP_STATUS ||
-		    atpb.atp_rresiovcnt != 1 ) {
-		fprintf( stderr, "Bad status response!\n" );
-		exit( 1 );
-	    }
+	    //if ( ((char *)rniov[ 0 ].iov_base)[ 1 ] != PAP_STATUS ||
+	    //        atpb.atp_rresiovcnt != 1 ) {
+	    //    fprintf( stderr, "Bad status response!\n" );
+	    //    exit( 1 );
+	    //}
 
 	if(debug){ printf( "< STATUS\n" ), fflush( stdout );}
 
@@ -856,14 +857,18 @@ static void updatestatus(char *s, int len)
 	fd = 2;
     }
 
+    char * error_code = malloc(len);
+    sprintf(error_code, "%X", s);
     iov[ 0 ].iov_base = "%%[ ";
     iov[ 0 ].iov_len = 4;
-    iov[ 1 ].iov_base = s;
+    //iov[ 1 ].iov_base = s;
+    iov[ 1 ].iov_base = error_code;
     iov[ 1 ].iov_len = len;
     iov[ 2 ].iov_base = " ]%%\n";
     iov[ 2 ].iov_len = 5;
 
     writev( fd, iov, 3 );
+    free(error_code);
     if ( status ) {
 	close( fd );
     }
