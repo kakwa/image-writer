@@ -24,9 +24,7 @@
 #include <atalk/netddp.h>
 #include <atalk/ddp.h>
 
-#ifdef HAVE_NETDB_H
 #include <netdb.h>
-#endif /* HAVE_NETDB_H */
 #include  "nbp_conf.h"
 
 /* FIXME/SOCKLEN_T: socklen_t is a unix98 feature. */
@@ -34,7 +32,7 @@
 #define SOCKLEN_T unsigned int
 #endif /* ! SOCKLEN_T */
 
-int nbp_unrgstr(const char *obj,const char *type,const char  *zone, const struct at_addr *addr)
+int nbp_unrgstr(const char *obj,const char *type,const char  *zone, const struct atalk_addr *addr)
 {
     struct sockaddr_at	to;
     struct nbphdr	nh;
@@ -91,7 +89,7 @@ int nbp_unrgstr(const char *obj,const char *type,const char  *zone, const struct
     memset( &to, 0, sizeof( struct sockaddr_at ));
     to.sat_family = AF_APPLETALK;
     if (addr) 
-      memcpy(&to.sat_addr, addr, sizeof(struct at_addr));
+      memcpy(&to.sat_addr, addr, sizeof(struct atalk_addr));
 #ifdef BSD4_4
     to.sat_len = sizeof( struct sockaddr_at );
 #endif /* BSD4_4 */

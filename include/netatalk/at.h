@@ -11,7 +11,7 @@
 #include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-#ifndef NO_DDP
+
 
 #if defined(linux) /* pull in the linux header */
 #include <sys/socket.h>
@@ -69,15 +69,10 @@
 /*
  * AppleTalk address.
  */
-#ifndef MACOSX_SERVER
-struct at_addr {
-#ifdef s_net
-#undef s_net
-#endif /* s_net */
+struct atalk_addr {
     u_short	s_net;
     u_char	s_node;
 };
-#endif /* MACOSX_SERVER */
 
 #define ATADDR_ANYNET	(u_short)0x0000
 #define ATADDR_ANYNODE	(u_char)0x00
@@ -100,7 +95,7 @@ struct sockaddr_at {
     short		sat_family;
 #endif /* BSD4_4 */
     u_char		sat_port;
-    struct at_addr	sat_addr;
+    struct atalk_addr	sat_addr;
 #ifdef notdef
     struct {
 	u_char		sh_type;
@@ -134,6 +129,6 @@ extern struct protosw	atalksw[];
 #endif /* KERNEL */
 
 #endif /* linux */
-#endif /* NO_DDP */
+
 #endif /* __AT_HEADER__ */
 

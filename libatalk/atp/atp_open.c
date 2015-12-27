@@ -43,7 +43,7 @@
 
 #include "atp_internals.h"
 
-ATP atp_open(u_int8_t port, const struct at_addr *saddr)
+ATP atp_open(u_int8_t port, const struct atalk_addr *saddr)
 {
     struct sockaddr_at  addr;
     int			s;
@@ -58,7 +58,7 @@ ATP atp_open(u_int8_t port, const struct at_addr *saddr)
     memset(&addr, 0, sizeof(addr));
     addr.sat_port = port;
     if (saddr) 
-      memcpy(&addr.sat_addr, saddr, sizeof(struct at_addr));
+      memcpy(&addr.sat_addr, saddr, sizeof(struct atalk_addr));
     if ((s = netddp_open(&addr, NULL)) < 0)
         return NULL;
 

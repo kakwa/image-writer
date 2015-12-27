@@ -9,8 +9,8 @@ set(iwh_VERSION_PATCH 5)
 
 set(iwh_VERSION ${iwh_VERSION_MAJOR}.${iwh_VERSION_MINOR}.${iwh_VERSION_PATCH})
 # set version as a definition
-set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -DE2S_VERSION='\"${iwh_VERSION}\"'")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DE2S_VERSION='\"${iwh_VERSION}\"'")
+set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -DVERSION='\"${iwh_VERSION}\"'")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DVERSION='\"${iwh_VERSION}\"'")
 
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES external-build)
 
@@ -85,25 +85,6 @@ include_directories(
 add_library(iwh
     ${SHARED}
     libatalk
-    libatalk/acl
-    libatalk/acl/ldap_config.c
-    libatalk/acl/ldap.c
-    libatalk/acl/unix.c
-    libatalk/acl/aclldap.h
-    libatalk/acl/uuid.c
-    libatalk/acl/cache.c
-    libatalk/acl/cache.h
-    libatalk/asp
-    libatalk/asp/asp_tickle.c
-    libatalk/asp/asp_child.h
-    libatalk/asp/asp_write.c
-    libatalk/asp/asp_close.c
-    libatalk/asp/asp_attn.c
-    libatalk/asp/asp_init.c
-    libatalk/asp/asp_shutdown.c
-    libatalk/asp/asp_cmdreply.c
-    libatalk/asp/asp_getreq.c
-    libatalk/asp/asp_getsess.c
     libatalk/atp
     libatalk/atp/atp_sresp.c
     libatalk/atp/atp_bufs.c

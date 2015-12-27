@@ -452,7 +452,7 @@ void set_processname(const char *processname)
 }
 
 /* Called by the LOG macro for syslog messages */
-static void make_syslog_entry(enum loglevels loglevel, enum logtypes logtype _U_, char *message)
+static void make_syslog_entry(enum loglevels loglevel, enum logtypes logtype , char *message)
 {
     if ( !log_config.syslog_opened ) {
         openlog(log_config.processname,

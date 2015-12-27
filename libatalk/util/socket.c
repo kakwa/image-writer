@@ -492,7 +492,7 @@ void fdset_add_fd(int maxconns,
 void fdset_del_fd(struct pollfd **fdsetp,
                   struct polldata **polldatap,
                   int *fdset_usedp,
-                  int *fdset_sizep _U_,
+                  int *fdset_sizep ,
                   int fd)
 {
     struct pollfd *fdset = *fdsetp;

@@ -367,7 +367,7 @@ at_aarpinput( ac, m )
     struct llc		*llc;
     struct sockaddr_at	sat;
     struct sockaddr	sa;
-    struct at_addr	spa, tpa, ma;
+    struct atalk_addr	spa, tpa, ma;
     int			op, s;
     u_short		net;
 
@@ -631,7 +631,7 @@ aarptfree( aat )
 
     struct aarptab *
 aarptnew( addr )
-    struct at_addr	*addr;
+    struct atalk_addr	*addr;
 {
     int			n;
     int			oldest = -1;

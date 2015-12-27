@@ -60,7 +60,7 @@ static struct asp_child    **asp_ac = NULL;
  * + space: if actual connections < potential
  * - space: actual connections ~ potential
  */
-static void tickle_handler(int sig _U_)
+static void tickle_handler(int sig )
 {
   int sid;
   

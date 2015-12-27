@@ -189,7 +189,7 @@ static ssize_t sendto_iface(struct interface *iface, int sockfd, const void *buf
     return ret;
 }
 
-static void as_timer(int sig _U_)
+static void as_timer(int sig )
 {
     struct sockaddr_at	sat;
     struct ziphdr	zh;
@@ -702,7 +702,7 @@ consistency()
 #endif /* DEBUG */
 
 static void
-as_debug(int sig _U_)
+as_debug(int sig )
 {
     struct interface	*iface;
     struct list		*l;
@@ -804,7 +804,7 @@ as_debug(int sig _U_)
  * Called when SIGTERM is recieved.  Remove all routes and then exit.
  */
 static void
-as_down(int sig _U_)
+as_down(int sig )
 {
     struct interface	*iface;
     struct gate		*gate;

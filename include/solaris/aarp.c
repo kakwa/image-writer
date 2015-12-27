@@ -32,7 +32,7 @@
 
 struct aarplist {
     struct aarplist	*aal_next, *aal_prev;
-    struct at_addr	aal_addr;
+    struct atalk_addr	aal_addr;
     u_char		aal_hwaddr[ ETHERADDRL ];
     u_char		aal_age;
     u_char		aal_flags;

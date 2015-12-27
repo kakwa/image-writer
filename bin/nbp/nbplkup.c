@@ -64,7 +64,7 @@ int main(int ac, char **av)
     struct nbpnve	*nn;
     char		*name;
     int			i, c, nresp = 1000;
-    struct at_addr      addr;
+    struct atalk_addr      addr;
     char		*obj = NULL;
     size_t		obj_len;
     charset_t		chMac = CH_MAC;

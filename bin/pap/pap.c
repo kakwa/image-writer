@@ -160,7 +160,7 @@ int main( int ac, char	**av)
     unsigned short	waiting, result;
     int			connattempts = 10;
     int			waitforidle = 0;
-    struct at_addr      addr;
+    struct atalk_addr      addr;
 
     extern char		*optarg;
     extern int		optind;

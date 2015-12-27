@@ -77,9 +77,8 @@ extern void freeifacelist(char **);
 
 #define diatolower(x)     _dialowermap[(unsigned char) (x)]
 #define diatoupper(x)     _diacasemap[(unsigned char) (x)]
-#ifndef NO_DDP
-extern int atalk_aton     (char *, struct at_addr *);
-#endif
+
+extern int atalk_aton     (char *, struct atalk_addr *);
 extern void bprint        (char *, int);
 extern int strdiacasecmp  (const char *, const char *);
 extern int strndiacasecmp (const char *, const char *, size_t);

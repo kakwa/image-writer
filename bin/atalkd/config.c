@@ -479,7 +479,7 @@ read_conf_err:
     return -1;
 }
 
-int noallmulti( struct interface *iface, char **av _U_)
+int noallmulti( struct interface *iface, char **av )
 {
     /* Linux specific, no effect on other platforms */
     iface->i_flags &= !IFACE_ALLMULTI;
@@ -488,7 +488,7 @@ int noallmulti( struct interface *iface, char **av _U_)
 }
 	
 /*ARGSUSED*/
-int router(struct interface *iface, char **av _U_)
+int router(struct interface *iface, char **av )
 {
     /* make sure "-router" and "-dontroute" aren't both on the same line. */
     if (iface->i_flags & IFACE_DONTROUTE) {
@@ -510,7 +510,7 @@ int router(struct interface *iface, char **av _U_)
 }
 
 /*ARGSUSED*/
-int dontroute(struct interface *iface, char **av _U_)
+int dontroute(struct interface *iface, char **av )
 {
     /* make sure "-router" and "-dontroute" aren't both on the same line. */
     if (iface->i_flags & IFACE_RSEED) {
@@ -523,7 +523,7 @@ int dontroute(struct interface *iface, char **av _U_)
 }
 
 /*ARGSUSED*/
-int seed( struct interface *iface, char **av _U_)
+int seed( struct interface *iface, char **av )
 {
     /*
      * Check to be sure "-seed" is before "-zone". we keep the old

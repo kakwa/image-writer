@@ -43,7 +43,7 @@ struct ether_aarp {
 #define aarp_tpnode	aarp_tpu.ap_node.an_node
 
 struct aarptab {
-    struct at_addr	aat_ataddr;
+    struct atalk_addr	aat_ataddr;
     u_char		aat_enaddr[ 6 ];
     u_char		aat_timer;
     u_char		aat_flags;
