@@ -36,3 +36,30 @@ Generated binaries:
 * iwh-nbplkup: utility scanning the appletalk network for available devices
 * iwh-papstatus: utility displaying a printer status
 * iwh-pap: utility sending stuff for the printer to print
+
+## Setting up the appletalk network
+
+Enable appletalk in Linux kernel:
+```
+modprobe appletalk
+```
+
+Change configuration:
+```
+vim conf/atalkd.conf
+```
+
+Start iwh-atalkd:
+```
+./iwh-atalkd -f conf/atalkd.conf
+```
+
+Scan the network:
+```
+./iwh-nbplkup
+```
+
+Get printer status:
+```
+./iwh-papstatus -p "<printer name>:ImageWriter"
+```
