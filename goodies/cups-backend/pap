@@ -1,0 +1,139 @@
+#!/bin/sh
+# $Id: pap,v 1.5 2002/05/15 14:17:13 rupi Exp $
+# cups backend script for printing to AppleTalk printers via pap
+# based on the cap backend-script found in CUPS Software Administrators Manual
+#
+# see CUPS Software Programmers Manual for explanation of enviroment and
+# arguments
+# usage: pap job user title copies options [filename]
+#
+#########################################################################
+#  Modified 07-FEB-2009, cwh9100@gmail.com.
+#  Updated for ubuntu, set the correct temp file, fixed for URIs with
+#  multiple spaces
+#########################################################################
+#  Modified 20-JUL-2007, mathog@caltech.edu.  Added license statement
+#  inside the script.  The original from "rupi" had a GPL2 notice in
+#  the README.
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+##########################################################################
+#
+# Modified 14-JAN-2005, mathog@caltech.edu.  Also allowed these
+# substitutions in URI:
+#   %20 -> space
+#   %40 -> @
+# This is standard URI usage but results in a pap URI which isn't
+# terribly readable in the web interface:
+#
+# DeviceURI pap://Foo%20%20bar%40net123/
+# for the printer at "Foo  bar@net123"
+#
+##################################################################
+#
+# Modified 15-OCT-2002, mathog@caltech.edu.  This version allows a
+# bastardized but simpler "URI" where this routine carries out these
+# translations:
+#
+#   "\ " -> " " 
+#   "__at__" -> "@"
+#
+# This allows most ethertalk addresses to be held in the URI, entered
+# on the add printer dialog, and displayed in something resembling
+# a readable form in http://localhost:631/printers.  If you need to
+# escape other characters see the "sed" section below.
+#
+# Use something like this in your printers.conf:
+#
+# DeviceURI pap://Foo\ \ bar__at__net123/
+# for the printer at "Foo  bar@net123"
+#
+# A single space does not need to be escaped in cups 1.1.14.
+#
+#######################################################################
+#
+# netatalk commands we're using
+PLOG=/tmp/pap.log
+nbplkup=/usr/local/bin/iwh-nbplkup
+pap=/usr/local/bin/iwh-pap
+#psf=/usr/bin/psf
+echo "+++++++++++++++++++++++++++++" >>$PLOG
+echo "`date` new job in pap backend" >>$PLOG
+
+# Device discovery if no argument is given
+# Explaination of Perl regex used here: ^\s+.. some whitespace characters at the 
+# beginning of a line. Followed by some [^:] non-colon characters we want to remember.
+if [ ${#} = 0 ]; then
+        $nbplkup :ImageWriter |  perl -e 'while (<>) { /^\s+([^:]+):.+$/; \
+                print "network pap \"$1\" \"ImageWriter\"\n"; }'
+    exit 0
+fi
+
+# Collect copies
+copies=${4}
+
+# Extract AppleTalk nbpname from device uri
+# also convert "/ " to " " and "__at__" to "@"
+# also convert %20 to space and %40 to @
+echo "uri $DEVICE_URI" >>$PLOG
+nbpname=`echo $DEVICE_URI \
+   | grep '^pap:' \
+   | sed -e 's/^pap:\/\///' \
+   | sed -e 's/\/$//g' \
+   | sed -e 's/\\\\ / /g' \
+   | sed -e 's/__at__/@/' \
+   | sed -e 's/\%20/ /g' \
+   | sed -e 's/\%40/@/' `
+
+# 5 command-line arguments mean file is at STDIN, the 6th arg is the filename
+file=/var/tmp/$$.prn
+if [ ${#} = 5 ]; then
+    # Get print file from stdin; copies have already been handled...
+    copies=1
+        # If we get data from stdin we have to delete tmpfiles ourself
+        delete=1
+    cat > ${file}
+else
+        file=$6
+fi
+
+echo "new file    $file"    >>$PLOG
+echo "copies  $copies"  >>$PLOG
+echo "nbpname $nbpname" >>$PLOG
+
+# Now everything should be ok -- we can print the file
+ret=0
+while [ $copies -gt 0 ]; do     
+                # no error handling implemented now !
+               #$pap -E -p "${nbpname}" $file
+               $pap -d -p "${nbpname}:ImageWriter@*" $file >>$PLOG 2>&1 || ret=1
+        copies=`expr $copies - 1`
+done
+
+# Remove any temporary files...
+if [ ${delete} = 1 ]; then
+        /bin/rm -f $file
+fi
+if [ $ret -eq 0 ]
+then
+    echo "Normal exit" >>$PLOG
+    exit 0
+else
+    echo "Failure" >>$PLOG
+    exit 1
+fi
+
+exit 0
