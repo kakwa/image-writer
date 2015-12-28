@@ -75,3 +75,8 @@ libatalk/.libs/
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
+iwh-atalkd
+iwh-nbplkup
+iwh-pap
+iwh-papstatus
+

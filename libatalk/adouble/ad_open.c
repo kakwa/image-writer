@@ -51,6 +51,8 @@
 #define MAX(a, b)  ((a) < (b) ? (b) : (a))
 #endif /* ! MAX */
 
+#define OPEN_NOFOLLOW_ERRNO ELOOP
+
 /*
  * AppleDouble entry default offsets.
  * The layout looks like this:

@@ -18,9 +18,7 @@
 
 /* POSIX.1 check */
 #include <sys/types.h>
-#ifdef HAVE_SYS_WAIT_H
 #include <sys/wait.h>
-#endif /* HAVE_SYS_WAIT_H */
 #ifndef WEXITSTATUS 
 #define WEXITSTATUS(stat_val) ((unsigned)(stat_val) >> 8)
 #endif /* ! WEXITSTATUS */
@@ -32,10 +30,6 @@
 #endif
 
 #include <errno.h>
-#ifdef TRU64
-#include <sys/mbuf.h>
-#include <net/route.h>
-#endif /* TRU64 */
 #include <net/if.h>
 #include <net/route.h>
 
@@ -60,11 +54,6 @@
 #include <atalk/atp.h>
 #include <atalk/paths.h>
 #include <atalk/util.h>
-
-#ifdef __svr4__
-#include <sys/sockio.h>
-#include <termios.h>
-#endif /* __svr4__ */
 
 #include "interface.h"
 #include "gate.h"

@@ -18,10 +18,8 @@
 #include <asm/types.h>
 #include <linux/atalk.h>
 
-#ifdef HAVE_ATALK_ADDR
 #define at_addr atalk_addr
 #define netrange atalk_netrange
-#endif /* HAVE_ATALK_ADDR */
 
 #else /* linux */
 

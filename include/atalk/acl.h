@@ -12,8 +12,6 @@
    GNU General Public License for more details.
 */
 
-#ifndef ATALK_ACL_H
-#define ATALK_ACL_H
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -25,6 +23,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/acl.h>
+#include <sys/stat.h>
 
 #define chmod_acl posix_chmod
 #define fchmod_acl posix_fchmod
@@ -32,4 +31,3 @@
 extern int posix_chmod(const char *name, mode_t mode);
 extern int posix_fchmod(int fd, mode_t mode);
 
-#endif /* ATALK_ACL_H */

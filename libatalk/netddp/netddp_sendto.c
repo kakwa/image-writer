@@ -67,4 +67,3 @@ int netddp_sendto(int fd, void *buf, size_t buflen, unsigned int dummy,
 }
 
 #endif /* os x server */
-#endif /* no ddp */

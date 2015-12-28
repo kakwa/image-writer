@@ -6,7 +6,7 @@
 #define ATALKD_MAIN_H
 
 #include <sys/cdefs.h>
-#include "config.h"
+//#include "config.h"
 
 extern int transition;
 extern int stabletimer, newrtmpdata;

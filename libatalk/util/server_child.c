@@ -18,17 +18,13 @@
 
 #include <stdlib.h>
 #include <string.h>
-#ifdef HAVE_UNISTD_H
 #include <unistd.h>
-#endif /* HAVE_UNISTD_H */
 #include <signal.h>
 #include <errno.h>
 
 /* POSIX.1 sys/wait.h check */
 #include <sys/types.h>
-#ifdef HAVE_SYS_WAIT_H
 #include <sys/wait.h>
-#endif /* HAVE_SYS_WAIT_H */
 #include <sys/time.h>
 
 #include <atalk/logger.h>

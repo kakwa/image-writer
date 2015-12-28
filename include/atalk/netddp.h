@@ -18,18 +18,18 @@
 extern int netddp_open   (struct sockaddr_at *, struct sockaddr_at *);
 
 
-extern int netddp_sendto (int, void *, size_t, unsigned int, 
-			   const struct sockaddr *, unsigned int);
-extern int netddp_recvfrom (int, void *, int, unsigned int, 
-			     struct sockaddr *, unsigned int *);
+//extern int netddp_sendto (int, void *, size_t, unsigned int, 
+//			   const struct sockaddr *, unsigned int);
+//extern int netddp_recvfrom (int, void *, int, unsigned int, 
+//			     struct sockaddr *, unsigned int *);
 //#define netddp_close(a)  ddp_close(a)
 //#else
 #include <unistd.h>
 #include <sys/types.h>
 
 #define netddp_close(a)  close(a)
-//#define netddp_sendto    sendto
-//#define netddp_recvfrom  recvfrom
+#define netddp_sendto    sendto
+#define netddp_recvfrom  recvfrom
 
 
 //#endif /* netddp.h */

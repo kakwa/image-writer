@@ -64,4 +64,3 @@ int netddp_recvfrom(int fd, void *buf, int buflen, unsigned int dummy,
 }
 
 #endif /* os x server */
-#endif /* no ddp */

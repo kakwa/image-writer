@@ -15,10 +15,6 @@
 #include <sys/ioctl.h>
 #include <atalk/logger.h>
 #include <sys/param.h>
-#ifdef TRU64
-#include <sys/mbuf.h>
-#include <net/route.h>
-#endif /* TRU64 */
 #include <net/if.h>
 #include <netatalk/at.h>
 #include <netatalk/endian.h>
@@ -30,30 +26,17 @@
 #include <string.h>
 #include <errno.h>
 #include <ctype.h>
+#include <unistd.h>
 
 /* STDC check */
-#if STDC_HEADERS
 #include <string.h>
-#else /* STDC_HEADERS */
-#ifndef HAVE_STRCHR
 #define strchr index
 #define strrchr index
-#endif /* HAVE_STRCHR */
 char *strchr (), *strrchr ();
-#ifndef HAVE_MEMCPY
 #define memcpy(d,s,n) bcopy ((s), (d), (n))
 #define memmove(d,s,n) bcopy ((s), (d), (n))
-#endif /* ! HAVE_MEMCPY */
-#endif /* STDC_HEADERS */
 
-#ifdef HAVE_FCNTL_H
 #include <fcntl.h>
-#endif /* HAVE_FCNTL_H */
-
-#ifdef __svr4__
-#include <sys/sockio.h>
-#include <sys/stropts.h>
-#endif /* __svr4__ */
 
 #include <atalk/unicode.h>
 #include "interface.h"
@@ -66,6 +49,8 @@ char *strchr (), *strrchr ();
 #ifndef IFF_SLAVE /* a little backward compatibility */
 #define IFF_SLAVE 0
 #endif /* IFF_SLAVE */
+
+#define _PATH_ATALKDCONF "/etc/iwhatackd/"
 
 int router(struct interface *iface, char **av);
 int dontroute(struct interface *iface, char **av);

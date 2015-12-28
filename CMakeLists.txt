@@ -9,8 +9,8 @@ set(iwh_VERSION_PATCH 5)
 
 set(iwh_VERSION ${iwh_VERSION_MAJOR}.${iwh_VERSION_MINOR}.${iwh_VERSION_PATCH})
 # set version as a definition
-set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -DVERSION='\"${iwh_VERSION}\"'")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DVERSION='\"${iwh_VERSION}\"'")
+set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -pthread -lacl -DVERSION='\"${iwh_VERSION}\"'")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -lacl -DVERSION='\"${iwh_VERSION}\"'")
 
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES external-build)
 
@@ -85,6 +85,7 @@ include_directories(
 add_library(iwh
     ${SHARED}
     libatalk
+    libatalk/acl/unix.c
     libatalk/atp
     libatalk/atp/atp_sresp.c
     libatalk/atp/atp_bufs.c
@@ -188,17 +189,6 @@ add_library(iwh
     libatalk/util/volinfo.c
     libatalk/util/socket.c
     libatalk/dummy.c
-    libatalk/compat
-    libatalk/compat/strcasecmp.c
-    libatalk/compat/rquota_xdr.c
-    libatalk/compat/getusershell.c
-    libatalk/compat/misc.c
-    libatalk/compat/inet_aton.c
-    libatalk/compat/strdup.c
-    libatalk/compat/strstr.c
-    libatalk/compat/mktemp.c
-    libatalk/compat/pselect.c
-    libatalk/compat/snprintf.c
     libatalk/netddp
     libatalk/netddp/netddp_open.c
     libatalk/netddp/netddp_sendto.c
