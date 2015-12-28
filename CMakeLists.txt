@@ -1,6 +1,8 @@
 cmake_minimum_required (VERSION 2.6)
 
-project (iwh)
+project (iwh NONE)
+enable_language(C)
+
 
 # Project version (sematic versionning)
 set(iwh_VERSION_MAJOR 2)
@@ -9,8 +11,7 @@ set(iwh_VERSION_PATCH 5)
 
 set(iwh_VERSION ${iwh_VERSION_MAJOR}.${iwh_VERSION_MINOR}.${iwh_VERSION_PATCH})
 # set version as a definition
-set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -pthread -lacl -DVERSION='\"${iwh_VERSION}\"'")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -lacl -DVERSION='\"${iwh_VERSION}\"'")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread -lacl -DVERSION='\"${iwh_VERSION}\"'")
 
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES external-build)
 
@@ -22,12 +23,10 @@ option(USE_GCC   "build application with gcc"         OFF)
 option(FORCELE   "force little endian architecture"   OFF)
 
 if(USE_CLANG)
-    set(CMAKE_CXX_COMPILER "clang++")
     set(CMAKE_CC_COMPILER  "clang"  )
 endif(USE_CLANG)
 
 if(USE_GCC)
-    set(CMAKE_CXX_COMPILER "g++")
     set(CMAKE_CC_COMPILER  "gcc")
 endif(USE_GCC)
 
@@ -272,9 +271,6 @@ add_executable(iwh-atalkd
 )
 
 target_link_libraries(iwh-atalkd iwh) 
-
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 -Wall")
 
 # install binaries and library
 INSTALL(TARGETS iwh iwh-nbplkup iwh-pap iwh-papstatus iwh-atalkd ${MEMSTREAMLIB}
