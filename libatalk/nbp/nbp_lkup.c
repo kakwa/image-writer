@@ -26,9 +26,7 @@
 #include <atalk/netddp.h>
 #include <atalk/ddp.h>
 
-#ifdef HAVE_NETDB_H
 #include <netdb.h>
-#endif /* HAVE_NETDB_H */
 
 #include  "nbp_conf.h"
 
@@ -39,7 +37,7 @@
 
 int nbp_lookup( const char *obj, const char *type, const char *zone, struct nbpnve *nn,
     int			nncnt,
-    const struct at_addr *ataddr)
+    const struct atalk_addr *ataddr)
 {
     struct sockaddr_at	addr, from;
     struct timeval	tv, tv_begin, tv_end;
@@ -55,7 +53,7 @@ int nbp_lookup( const char *obj, const char *type, const char *zone, struct nbpn
     memset(&addr, 0, sizeof(addr));
     memset(&from, 0, sizeof(from));
     if (ataddr) 
-      memcpy(&addr.sat_addr, ataddr, sizeof(struct at_addr));
+      memcpy(&addr.sat_addr, ataddr, sizeof(struct atalk_addr));
     if ((s = netddp_open(&addr, &from)) < 0)
       return -1;
 

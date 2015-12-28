@@ -19,9 +19,7 @@
 #include <atalk/pap.h>
 #include <atalk/nbp.h>
 #include <atalk/util.h>
-#ifdef HAVE_FCNTL_H
 #include <fcntl.h>
-#endif /* HAVE_FCNTL_H */
 #include <stdio.h>
 #include <string.h>
 #include <string.h>
@@ -160,7 +158,7 @@ int main( int ac, char	**av)
     unsigned short	waiting, result;
     int			connattempts = 10;
     int			waitforidle = 0;
-    struct at_addr      addr;
+    struct atalk_addr      addr;
 
     extern char		*optarg;
     extern int		optind;

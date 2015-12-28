@@ -24,7 +24,7 @@
 #ifndef _ATALK_NBP_H
 #define _ATALK_NBP_H 1
 
-#ifndef NO_DDP
+
 
 #define NBP_UNRGSTR_4ARGS 1
 #define ATP_OPEN_2ARGS 1
@@ -90,11 +90,11 @@ struct nbpnve {
 extern int nbp_name (const char *, char **, char **, char **);
 extern int nbp_lookup (const char *, const char *, const char *,
 			   struct nbpnve *, const int, 
-			   const struct at_addr *);
+			   const struct atalk_addr *);
 extern int nbp_rgstr (struct sockaddr_at *, 
 			  const char *, const char *, const char *);
 extern int nbp_unrgstr (const char *, const char *, const char *,
-			    const struct at_addr *);
+			    const struct atalk_addr *);
 
-#endif  /* NO_DDP */
+
 #endif

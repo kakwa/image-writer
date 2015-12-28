@@ -23,9 +23,7 @@
 #endif
 
 #include <sys/types.h>
-#ifdef HAVE_UNISTD_H
 #include <unistd.h>
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -42,6 +40,7 @@
 #define SAFE_FREE(x) do { if ((x) != NULL) {free(x); x=NULL;} } while(0)
 #endif
 #define BACKTRACE_STACK_SIZE 64
+#define RETSIGTYPE void
 
 static void (*cont_fn)(void *);
 

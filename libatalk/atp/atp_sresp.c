@@ -36,6 +36,7 @@
 #include <sys/socket.h>
 
 #include <netatalk/at.h>
+#include <atalk/globals.h>
 #include <netatalk/endian.h>
 
 #include <atalk/netddp.h>

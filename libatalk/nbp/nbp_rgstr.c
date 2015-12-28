@@ -24,9 +24,7 @@
 #include <atalk/ddp.h>
 #include <atalk/netddp.h>
 
-#ifdef HAVE_NETDB_H
 #include <netdb.h>
-#endif /* HAVE_NETDB_H */
 #include  "nbp_conf.h"
 
 /* FIXME/SOCKLEN_T: socklen_t is a unix98 feature. */

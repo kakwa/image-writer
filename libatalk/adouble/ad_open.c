@@ -51,6 +51,8 @@
 #define MAX(a, b)  ((a) < (b) ? (b) : (a))
 #endif /* ! MAX */
 
+#define OPEN_NOFOLLOW_ERRNO ELOOP
+
 /*
  * AppleDouble entry default offsets.
  * The layout looks like this:
@@ -821,7 +823,7 @@ static int ad_mkrf(char *path)
  * ._name
  */
 char *
-ad_path_osx(const char *path, int adflags _U_)
+ad_path_osx(const char *path, int adflags )
 {
     static char pathbuf[ MAXPATHLEN + 1];
     char    c, *slash, buf[MAXPATHLEN + 1];
@@ -847,7 +849,7 @@ ad_path_osx(const char *path, int adflags _U_)
     return pathbuf;
 }
 /* -------------------- */
-static int ad_mkrf_osx(char *path _U_)
+static int ad_mkrf_osx(char *path )
 {
     return 0;
 }
@@ -1115,7 +1117,7 @@ static int new_rfork(const char *path, struct adouble *ad, int adflags);
 #endif
 
 /* --------------------------- */
-static int ad_check_size(struct adouble *ad _U_, struct stat *st)
+static int ad_check_size(struct adouble *ad , struct stat *st)
 {
     if (st->st_size > 0 && st->st_size < AD_DATASZ1)
         return 1;
@@ -1123,7 +1125,7 @@ static int ad_check_size(struct adouble *ad _U_, struct stat *st)
 }
 
 /* --------------------------- */
-static int ad_check_size_sfm(struct adouble *ad _U_, struct stat *st)
+static int ad_check_size_sfm(struct adouble *ad , struct stat *st)
 {
     if (st->st_size > 0 && st->st_size < AD_SFM_LEN)
         return 1;
@@ -1143,7 +1145,7 @@ static int ad_header_upgrade(struct adouble *ad, char *name)
 }
 
 /* --------------------------- */
-static int ad_header_upgrade_none(struct adouble *ad _U_, char *name _U_)
+static int ad_header_upgrade_none(struct adouble *ad , char *name )
 {
     return 0;
 }

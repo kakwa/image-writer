@@ -1,3 +1,0 @@
-misc.lo: misc.c ../../config.h
-
-../../config.h:

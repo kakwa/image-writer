@@ -42,6 +42,7 @@
 #include <atalk/errchk.h>
 #include <atalk/bstrlib.h>
 #include <atalk/bstradd.h>
+#include <fcntl.h>
 
 struct perm {
     uid_t uid;
@@ -131,7 +132,7 @@ static int RF_renamedir_adouble(VFS_FUNC_ARGS_RENAMEDIR)
 }
 
 /* ----------------- */
-static int deletecurdir_adouble_loop(const struct vol *vol, struct dirent *de, char *name, void *data _U_, int flag _U_)
+static int deletecurdir_adouble_loop(const struct vol *vol, struct dirent *de, char *name, void *data , int flag )
 {
     struct stat st;
     int         err;
@@ -192,7 +193,7 @@ static int RF_setdirunixmode_adouble(VFS_FUNC_ARGS_SETDIRUNIXMODE)
 }
 
 /* ----------------- */
-static int setdirmode_adouble_loop(const struct vol *vol, struct dirent *de _U_, char *name, void *data, int flag)
+static int setdirmode_adouble_loop(const struct vol *vol, struct dirent *de , char *name, void *data, int flag)
 {
     mode_t hf_mode = *(mode_t *)data;
     struct stat st;
@@ -233,7 +234,7 @@ static int RF_setdirmode_adouble(VFS_FUNC_ARGS_SETDIRMODE)
 }
 
 /* ----------------- */
-static int setdirowner_adouble_loop(const struct vol *vol, struct dirent *de _U_, char *name, void *data, int flag _U_)
+static int setdirowner_adouble_loop(const struct vol *vol, struct dirent *de , char *name, void *data, int flag )
 {
     struct perm   *owner  = data;
 
@@ -496,7 +497,7 @@ EC_CLEANUP:
 /*********************************************************************************
  * sfm adouble format
  *********************************************************************************/
-static int ads_chown_loop(const struct vol *vol, struct dirent *de _U_, char *name, void *data, int flag _U_)
+static int ads_chown_loop(const struct vol *vol, struct dirent *de , char *name, void *data, int flag )
 {
     struct perm   *owner  = data;
     
@@ -530,7 +531,7 @@ static int RF_chown_ads(VFS_FUNC_ARGS_CHOWN)
 }
 
 /* --------------------------------- */
-static int deletecurdir_ads1_loop(const struct vol *vol _U_, struct dirent *de _U_, char *name, void *data _U_, int flag _U_)
+static int deletecurdir_ads1_loop(const struct vol *vol , struct dirent *de , char *name, void *data , int flag )
 {
     return netatalk_unlink(name);
 }
@@ -551,7 +552,7 @@ static int ads_delete_rf(char *name)
     return netatalk_rmdir(-1, name);
 }
 
-static int deletecurdir_ads_loop(const struct vol *vol, struct dirent *de, char *name, void *data _U_, int flag _U_)
+static int deletecurdir_ads_loop(const struct vol *vol, struct dirent *de, char *name, void *data , int flag )
 {
     struct stat st;
     
@@ -581,7 +582,7 @@ struct set_mode {
     struct stat *st;
 };
 
-static int ads_setfilmode_loop(const struct vol *vol, struct dirent *de _U_, char *name, void *data, int flag _U_)
+static int ads_setfilmode_loop(const struct vol *vol, struct dirent *de , char *name, void *data, int flag )
 {
     struct set_mode *param = data;
 
@@ -663,7 +664,7 @@ struct dir_mode {
     int    dropbox;
 };
 
-static int setdirmode_ads_loop(const struct vol *vol, struct dirent *de _U_, char *name, void *data, int flag)
+static int setdirmode_ads_loop(const struct vol *vol, struct dirent *de , char *name, void *data, int flag)
 {
 
     struct dir_mode *param = data;
@@ -719,7 +720,7 @@ static int RF_setdirmode_ads(VFS_FUNC_ARGS_SETDIRMODE)
 }
 
 /* ------------------- */
-static int setdirowner_ads1_loop(const struct vol *vol _U_, struct dirent *de _U_, char *name, void *data, int flag _U_)
+static int setdirowner_ads1_loop(const struct vol *vol , struct dirent *de , char *name, void *data, int flag )
 {
     struct perm   *owner  = data;
 
@@ -731,7 +732,7 @@ static int setdirowner_ads1_loop(const struct vol *vol _U_, struct dirent *de _U
     return 0;
 }
 
-static int setdirowner_ads_loop(const struct vol *vol, struct dirent *de _U_, char *name, void *data, int flag)
+static int setdirowner_ads_loop(const struct vol *vol, struct dirent *de , char *name, void *data, int flag)
 {
     struct perm   *owner  = data;
 

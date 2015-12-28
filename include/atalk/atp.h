@@ -26,13 +26,12 @@
 #ifndef _ATALK_ATP_H
 #define _ATALK_ATP_H 1
 
-#ifndef NO_DDP
- 
 #include <sys/cdefs.h>
 #include <sys/types.h>
 #include <sys/time.h>
 #include <netatalk/at.h>
 #include <netatalk/endian.h>
+#include <atalk/globals.h>
 
 /* ATP packet format
 
@@ -182,15 +181,14 @@ struct atp_block {
 #define ATP_TRESP	(2<<6)		/* Trans. RESPonse */
 #define ATP_TREL	(3<<6)		/* Trans. RELease */
 
-extern ATP		atp_open  (u_int8_t, 
-				       const struct at_addr *);
-extern int		atp_close (ATP);
-extern int		atp_sreq  (ATP, struct atp_block *, int, 
-				       u_int8_t);
-extern int		atp_rresp (ATP, struct atp_block *);
-extern int		atp_rsel  (ATP, struct sockaddr_at *, int);
-extern int		atp_rreq  (ATP, struct atp_block *);
-extern int		atp_sresp (ATP, struct atp_block *);
+ATP atp_open(u_int8_t port, const struct atalk_addr *saddr);
+//ATP		atp_open  (u_int8_t, const struct atalk_addr *);
+int		atp_close (ATP);
+int		atp_sreq  (ATP, struct atp_block *, int, 
+ 		       u_int8_t);
+int		atp_rresp (ATP, struct atp_block *);
+int		atp_rsel  (ATP, struct sockaddr_at *, int);
+int		atp_rreq  (ATP, struct atp_block *);
+int		atp_sresp (ATP, struct atp_block *);
 
-#endif  /* NO_DDP */
 #endif

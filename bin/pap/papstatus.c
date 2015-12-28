@@ -111,7 +111,7 @@ int main( int ac, char **av)
     ATP			atp;
     int			wait, c, err = 0;
     char		*obj = NULL, *type = "LaserWriter", *zone = "*";
-    struct at_addr      addr;
+    struct atalk_addr      addr;
 
     extern char		*optarg;
     extern int		optind;

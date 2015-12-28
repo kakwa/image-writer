@@ -1,3 +1,0 @@
-strcasestr.lo: strcasestr.c ../../config.h
-
-../../config.h:

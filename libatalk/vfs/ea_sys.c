@@ -55,6 +55,7 @@
 #define ENOATTR ENODATA
 #endif
 
+#define OPEN_NOFOLLOW_ERRNO ELOOP
 
 /**********************************************************************************
  * EA VFS funcs for storing EAs in nativa filesystem EAs

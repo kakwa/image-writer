@@ -34,7 +34,7 @@
 /* initialize relevant things for dsi_write. this returns the amount
  * of data in the data buffer. the interface has been reworked to allow
  * for arbitrary buffers. */
-size_t dsi_writeinit(DSI *dsi, void *buf, const size_t buflen _U_)
+size_t dsi_writeinit(DSI *dsi, void *buf, const size_t buflen)
 {
   size_t len, header;
 

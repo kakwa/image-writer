@@ -15,26 +15,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifdef HAVE_UNISTD_H
 #include <unistd.h>
-#endif /* HAVE_UNISTD_H */
 #include <errno.h>
-#ifdef HAVE_NETDB_H
+//#ifdef HAVE_NETDB_H
 #include <netdb.h>
-#endif /* HAVE_NETDB_H */
+//#endif /* HAVE_NETDB_H */
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/socket.h>
 
-#ifdef HAVE_STDINT_H
 #include <stdint.h>
-#endif /* HAVE_STDINT_H */
 
 #include <sys/ioctl.h>
-#ifdef TRU64
-#include <sys/mbuf.h>
-#include <net/route.h>
-#endif /* TRU64 */
 #include <net/if.h>
 #include <netinet/tcp.h>
 #include <netinet/in.h>
@@ -43,15 +35,15 @@
 #include <signal.h>
 #include <atalk/logger.h>
 
-#ifdef __svr4__
-#include <sys/sockio.h>
-#endif /* __svr4__ */
+//#ifdef __svr4__
+//#include <sys/sockio.h>
+//#endif /* __svr4__ */
 
-#ifdef TCPWRAP
-#include <tcpd.h>
-int allow_severity = log_info;
-int deny_severity = log_warning;
-#endif /* TCPWRAP */
+//#ifdef TCPWRAP
+//#include <tcpd.h>
+//int allow_severity = log_info;
+//int deny_severity = log_warning;
+//#endif /* TCPWRAP */
 
 #include <atalk/dsi.h>
 #include <atalk/compat.h>
@@ -85,7 +77,8 @@ static void dsi_tcp_close(DSI *dsi)
 }
 
 /* alarm handler for tcp_open */
-static void timeout_handler(int sig _U_)
+//static void timeout_handler(int sig )
+static void timeout_handler(int sig)
 {
     LOG(log_error, logtype_dsi, "dsi_tcp_open: connection timed out");
     exit(EXITERR_CLNT);

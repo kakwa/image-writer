@@ -72,4 +72,11 @@ etc/psf/psa
 etc/psf/psf
 etc/uams/.libs/
 libatalk/.libs/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+iwh-atalkd
+iwh-nbplkup
+iwh-pap
+iwh-papstatus
 
