@@ -50,7 +50,7 @@ char *strchr (), *strrchr ();
 #define IFF_SLAVE 0
 #endif /* IFF_SLAVE */
 
-#define _PATH_ATALKDCONF "/etc/iwhatackd/"
+#define _PATH_ATALKDCONF "/etc/iwh-atalkd/"
 
 int router(struct interface *iface, char **av);
 int dontroute(struct interface *iface, char **av);
