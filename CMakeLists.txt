@@ -277,7 +277,7 @@ target_link_libraries(iwh-atalkd iwh)
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 -Wall")
 
 # install binaries and library
-INSTALL(TARGETS iwh iwh ${MEMSTREAMLIB}
+INSTALL(TARGETS iwh iwh-nbplkup iwh-pap iwh-papstatus iwh-atalkd ${MEMSTREAMLIB}
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
